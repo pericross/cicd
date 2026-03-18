@@ -1,0 +1,34 @@
+{
+  "testFramework": "vitest",
+  "coverage": {
+    "enabled": true,
+    "threshold": {
+      "lines": 80,
+      "functions": 80,
+      "branches": 80,
+      "statements": 80
+    }
+  },
+  "e2e": {
+    "framework": "playwright",
+    "browsers": ["chromium", "firefox", "webkit"],
+    "baseUrl": "http://localhost:3000"
+  },
+  "performance": {
+    "lighthouse": {
+      "enabled": true,
+      "thresholds": {
+        "performance": 90,
+        "accessibility": 90,
+        "best-practices": 90,
+        "seo": 90
+      }
+    }
+  },
+  "security": {
+    "scanners": [
+      "npm-audit",
+      "snyk"
+    ]
+  }
+}

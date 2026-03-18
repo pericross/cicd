@@ -1,0 +1,22 @@
+name: Health Check
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'  # Every 15 minutes
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    name: Health Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Health Check
+        run: |
+          chmod +x scripts/health-check.sh
+          # Check your deployed services
+          ./scripts/health-check.sh https://your-staging-domain.com || echo "Staging check failed"
+          ./scripts/health-check.sh https://your-production-domain.com || echo "Production check failed"
