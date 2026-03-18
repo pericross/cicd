@@ -6,6 +6,9 @@ import { DeployRouter } from './routes/deploy';
 import { ServerRouter } from './routes/server';
 import { DockerRouter } from './routes/docker';
 import { GitHubRouter } from './routes/github';
+import { HealthRouter } from './routes/health';
+import { ProcessRouter } from './routes/process';
+import { ServerAdminRouter } from './routes/server-admin';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -71,9 +74,12 @@ app.use('/api/deploy', DeployRouter);
 app.use('/api/server', ServerRouter);
 app.use('/api/docker', DockerRouter);
 app.use('/api/github', GitHubRouter);
+app.use('/api/health', HealthRouter);
+app.use('/api/process', ProcessRouter);
+app.use('/api/server-admin', ServerAdminRouter);
 
 // Health check
-app.get('/api/health', (req, res) => {
+app.get('/api/health-check', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
@@ -81,4 +87,10 @@ server.listen(PORT, () => {
   console.log(`🚀 CI/CD Deploy Bridge Service running on port ${PORT}`);
   console.log(`📡 WebSocket available at ws://localhost:${PORT}/ws`);
   console.log(`📦 API available at http://localhost:${PORT}/api`);
+  console.log(`\nAvailable endpoints:`);
+  console.log(`  POST /api/deploy/github     - Deploy from GitHub`);
+  console.log(`  GET  /api/health/check      - Health check`);
+  console.log(`  GET  /api/process/list      - PM2 process list`);
+  console.log(`  POST /api/server-admin/setup - Server setup`);
+  console.log(`  POST /api/server-admin/exec  - Execute command`);
 });
