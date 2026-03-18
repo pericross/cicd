@@ -1,0 +1,23 @@
+{
+  "name": "@pericross/cicd",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CI/CD Platform for remote deployment and monitoring",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "pnpm --parallel -r dev",
+    "dev:frontend": "pnpm --filter @pericross/cicd-frontend dev",
+    "dev:backend": "pnpm --filter @pericross/cicd-backend dev",
+    "build": "pnpm -r build",
+    "build:frontend": "pnpm --filter @pericross/cicd-frontend build",
+    "build:backend": "pnpm --filter @pericross/cicd-backend build",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test",
+    "clean": "pnpm -r clean"
+  },
+  "keywords": ["cicd", "deployment", "devops"],
+  "author": "pericross",
+  "license": "MIT"
+}
